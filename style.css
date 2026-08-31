@@ -1,151 +1,1206 @@
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-body {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    <title>usha.ai</title>
 
-    background: #f6f3ec;
-    font-family: Arial, Helvetica, sans-serif;
-    color: #171717;
-}
+    <style>
 
-.container {
-    width: 100%;
-    max-width: 560px;
-    padding: 25px;
-}
+        /* =========================
+           RESET
+        ========================= */
 
-.card {
-    background: #ffffff;
-    padding: 40px;
-    border-radius: 18px;
-    border: 1px solid #e5e5e5;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    box-shadow:
-        0 15px 45px rgba(0, 0, 0, 0.08);
-}
+        html {
+            scroll-behavior: smooth;
+        }
 
-.logo {
-    width: 58px;
-    height: 58px;
+        body {
+            font-family:
+                Inter,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                Arial,
+                sans-serif;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+            background: #f8f7f3;
+            color: #171717;
 
-    background: #d4af37;
-    border-radius: 14px;
+            line-height: 1.6;
+        }
 
-    font-size: 27px;
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
 
-    margin-bottom: 22px;
-}
 
-h1 {
-    font-size: 34px;
-    margin-bottom: 12px;
-}
+        /* =========================
+           NAVBAR
+        ========================= */
 
-.funny {
-    color: #666;
-    font-size: 15px;
-    line-height: 1.7;
-    margin-bottom: 30px;
-}
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
 
-form {
-    display: flex;
-    flex-direction: column;
-}
+            background: rgba(248, 247, 243, 0.9);
 
-label {
-    font-size: 13px;
-    font-weight: 600;
-    margin-bottom: 8px;
-    margin-top: 18px;
-}
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
 
-input,
-textarea {
-    width: 100%;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+        }
 
-    border: 1px solid #ddd;
-    border-radius: 10px;
+        .nav-inner {
+            width: min(1180px, 100%);
 
-    padding: 14px;
+            height: 72px;
 
-    font-size: 14px;
-    font-family: inherit;
+            margin: auto;
+            padding: 0 24px;
 
-    outline: none;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
 
-    transition: 0.2s;
-}
+        .logo {
+            font-size: 22px;
+            font-weight: 800;
 
-input:focus,
-textarea:focus {
-    border-color: #d4af37;
-    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.12);
-}
+            letter-spacing: -1px;
+        }
 
-textarea {
-    resize: vertical;
-}
+        .logo span {
+            color: #c49b27;
+        }
 
-button {
-    margin-top: 25px;
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
 
-    border: none;
-    border-radius: 10px;
+        .nav-menu a {
+            font-size: 14px;
+            color: #666;
 
-    padding: 14px 20px;
+            transition: 0.2s ease;
+        }
 
-    background: #171717;
-    color: #ffffff;
+        .nav-menu a:hover {
+            color: #c49b27;
+        }
 
-    font-size: 14px;
-    font-weight: 600;
 
-    cursor: pointer;
+        /* =========================
+           HERO
+        ========================= */
 
-    transition: 0.2s;
-}
+        .hero {
+            min-height: 88vh;
 
-button:hover {
-    background: #d4af37;
-    color: #171717;
-}
+            width: min(1180px, 100%);
 
-button:active {
-    transform: scale(0.98);
-}
+            margin: auto;
 
-.tiny {
-    text-align: center;
-    color: #999;
+            padding:
+                100px 24px
+                80px;
 
-    font-size: 11px;
+            display: flex;
+            align-items: center;
+        }
 
-    margin-top: 25px;
-}
+        .hero-content {
+            max-width: 850px;
+        }
 
-@media (max-width: 600px) {
+        .eyebrow {
+            display: inline-flex;
 
-    .container {
-        padding: 15px;
-    }
+            align-items: center;
 
-    .card {
-        padding: 28px 22px;
-    }
+            padding: 7px 13px;
 
-    h1 {
-        font-size: 28px;
-    }
-}
+            border: 1px solid #dedbd2;
+
+            border-radius: 50px;
+
+            background: #fff;
+
+            color: #777;
+
+            font-size: 12px;
+
+            margin-bottom: 26px;
+        }
+
+        .hero h1 {
+            font-size: clamp(54px, 9vw, 110px);
+
+            line-height: 0.92;
+
+            letter-spacing: -6px;
+
+            max-width: 900px;
+
+            margin-bottom: 30px;
+        }
+
+        .gold {
+            color: #c49b27;
+        }
+
+        .hero-description {
+            max-width: 620px;
+
+            color: #666;
+
+            font-size: clamp(16px, 2vw, 19px);
+
+            line-height: 1.8;
+
+            margin-bottom: 35px;
+        }
+
+        .button-row {
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 12px;
+        }
+
+        .button {
+            display: inline-flex;
+
+            align-items: center;
+            justify-content: center;
+
+            min-height: 46px;
+
+            padding: 0 20px;
+
+            border-radius: 10px;
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            transition:
+                transform 0.2s ease,
+                background 0.2s ease;
+        }
+
+        .button-dark {
+            background: #171717;
+            color: white;
+        }
+
+        .button-light {
+            background: white;
+
+            border: 1px solid #dedbd2;
+
+            color: #333;
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+        }
+
+        .button-dark:hover {
+            background: #c49b27;
+            color: #171717;
+        }
+
+
+        /* =========================
+           FUNNY STRIP
+        ========================= */
+
+        .funny-strip {
+            border-top: 1px solid #dedbd2;
+            border-bottom: 1px solid #dedbd2;
+
+            background: #fff;
+
+            overflow: hidden;
+        }
+
+        .funny-inner {
+            width: min(1180px, 100%);
+
+            margin: auto;
+
+            padding: 18px 24px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 20px;
+        }
+
+        .funny-inner span {
+            color: #777;
+
+            font-size: 13px;
+        }
+
+        .funny-inner strong {
+            font-size: 13px;
+        }
+
+
+        /* =========================
+           CONTENT
+        ========================= */
+
+        .content {
+            width: min(1180px, 100%);
+
+            margin: auto;
+
+            padding: 120px 24px;
+        }
+
+        .content-grid {
+            display: grid;
+
+            grid-template-columns:
+                0.8fr
+                1.2fr;
+
+            gap: 90px;
+
+            align-items: start;
+        }
+
+        .content-title {
+            position: sticky;
+            top: 110px;
+        }
+
+        .content-title small {
+            color: #c49b27;
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1px;
+        }
+
+        .content-title h2 {
+            margin-top: 12px;
+
+            font-size: clamp(34px, 5vw, 60px);
+
+            line-height: 1;
+
+            letter-spacing: -3px;
+        }
+
+        .content-copy {
+            color: #666;
+
+            font-size: 16px;
+
+            line-height: 1.9;
+        }
+
+        .content-copy p {
+            margin-bottom: 22px;
+        }
+
+
+        /* =========================
+           NATURAL INPUT AREA
+        ========================= */
+
+        .input-area {
+            margin-top: 50px;
+
+            border-top: 1px solid #dedbd2;
+        }
+
+        .input-row {
+            display: grid;
+
+            grid-template-columns:
+                1fr
+                1fr;
+
+            border-bottom: 1px solid #dedbd2;
+        }
+
+        .input-block {
+            padding: 22px 0;
+
+            display: flex;
+
+            flex-direction: column;
+        }
+
+        .input-block:first-child {
+            padding-right: 20px;
+        }
+
+        .input-block:last-child {
+            padding-left: 20px;
+
+            border-left: 1px solid #dedbd2;
+        }
+
+        .input-label {
+            font-size: 11px;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1px;
+
+            color: #999;
+
+            margin-bottom: 8px;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+
+            border: none;
+
+            outline: none;
+
+            background: transparent;
+
+            color: #171717;
+
+            font-family: inherit;
+
+            font-size: 16px;
+        }
+
+        input::placeholder,
+        textarea::placeholder {
+            color: #aaa;
+        }
+
+        textarea {
+            resize: vertical;
+
+            min-height: 110px;
+        }
+
+
+        /* =========================
+           IMAGE AREA
+        ========================= */
+
+        .image-area {
+            padding: 24px 0;
+
+            border-bottom: 1px solid #dedbd2;
+        }
+
+        .image-label {
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 20px;
+
+            cursor: pointer;
+        }
+
+        .image-label-left {
+            display: flex;
+
+            flex-direction: column;
+        }
+
+        .image-title {
+            font-size: 16px;
+
+            font-weight: 600;
+        }
+
+        .image-hint {
+            color: #999;
+
+            font-size: 12px;
+
+            margin-top: 3px;
+        }
+
+        .image-button {
+            padding: 10px 15px;
+
+            border: 1px solid #dedbd2;
+
+            border-radius: 9px;
+
+            background: #fff;
+
+            font-size: 12px;
+
+            font-weight: 600;
+
+            white-space: nowrap;
+        }
+
+        #image {
+            display: none;
+        }
+
+        .preview {
+            display: none;
+
+            margin-top: 18px;
+        }
+
+        .preview img {
+            display: block;
+
+            max-width: 180px;
+
+            max-height: 180px;
+
+            object-fit: cover;
+
+            border-radius: 12px;
+
+            border: 1px solid #dedbd2;
+        }
+
+
+        /* =========================
+           ACTION
+        ========================= */
+
+        .action {
+            padding-top: 28px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 20px;
+        }
+
+        .action-note {
+            color: #999;
+
+            font-size: 11px;
+
+            max-width: 280px;
+        }
+
+        .coming-soon {
+            border: none;
+
+            padding: 14px 24px;
+
+            border-radius: 10px;
+
+            background: #171717;
+
+            color: white;
+
+            font-family: inherit;
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition: 0.2s ease;
+        }
+
+        .coming-soon:hover {
+            background: #c49b27;
+
+            color: #171717;
+
+            transform: translateY(-2px);
+        }
+
+        .coming-soon:disabled {
+            opacity: 0.65;
+
+            cursor: not-allowed;
+
+            transform: none;
+        }
+
+
+        /* =========================
+           ABOUT
+        ========================= */
+
+        .about {
+            background: #171717;
+
+            color: white;
+        }
+
+        .about-inner {
+            width: min(1180px, 100%);
+
+            margin: auto;
+
+            padding: 120px 24px;
+        }
+
+        .about-inner h2 {
+            max-width: 800px;
+
+            font-size: clamp(38px, 6vw, 75px);
+
+            line-height: 1;
+
+            letter-spacing: -4px;
+
+            margin-bottom: 25px;
+        }
+
+        .about-inner p {
+            max-width: 600px;
+
+            color: #aaa;
+
+            line-height: 1.8;
+
+            font-size: 15px;
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            background: #171717;
+
+            color: #777;
+
+            border-top: 1px solid #333;
+        }
+
+        .footer-inner {
+            width: min(1180px, 100%);
+
+            margin: auto;
+
+            padding: 25px 24px;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            gap: 20px;
+
+            font-size: 11px;
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 760px) {
+
+            .nav-inner {
+                height: 64px;
+
+                padding: 0 18px;
+            }
+
+            .nav-menu {
+                gap: 15px;
+            }
+
+            .nav-menu a {
+                font-size: 12px;
+            }
+
+            .hero {
+                min-height: 80vh;
+
+                padding:
+                    80px 18px
+                    70px;
+            }
+
+            .hero h1 {
+                letter-spacing: -3px;
+            }
+
+            .hero-description {
+                font-size: 15px;
+            }
+
+            .funny-inner {
+                padding: 15px 18px;
+
+                flex-direction: column;
+
+                align-items: flex-start;
+
+                gap: 4px;
+            }
+
+            .content {
+                padding: 80px 18px;
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+
+                gap: 45px;
+            }
+
+            .content-title {
+                position: static;
+            }
+
+            .content-title h2 {
+                letter-spacing: -2px;
+            }
+
+            .input-row {
+                grid-template-columns: 1fr;
+            }
+
+            .input-block:first-child {
+                padding-right: 0;
+            }
+
+            .input-block:last-child {
+                padding-left: 0;
+
+                border-left: none;
+
+                border-top: 1px solid #dedbd2;
+            }
+
+            .image-label {
+                align-items: flex-start;
+
+                flex-direction: column;
+            }
+
+            .action {
+                align-items: stretch;
+
+                flex-direction: column;
+            }
+
+            .coming-soon {
+                width: 100%;
+            }
+
+            .about-inner {
+                padding: 80px 18px;
+            }
+
+            .about-inner h2 {
+                letter-spacing: -2px;
+            }
+
+            .footer-inner {
+                padding: 22px 18px;
+
+                flex-direction: column;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         NAVBAR
+    ========================= -->
+
+    <nav class="navbar">
+
+        <div class="nav-inner">
+
+            <a href="#home" class="logo">
+                usha<span>.ai</span>
+            </a>
+
+            <div class="nav-menu">
+
+                <a href="#home">
+                    Home
+                </a>
+
+                <a href="#create">
+                    Create
+                </a>
+
+                <a href="#about">
+                    About
+                </a>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- =========================
+         HERO
+    ========================= -->
+
+    <main id="home">
+
+        <section class="hero">
+
+            <div class="hero-content">
+
+                <div class="eyebrow">
+                    ✦ Welcome to usha.ai
+                </div>
+
+                <h1>
+                    Make something
+                    <span class="gold">worth keeping.</span>
+                </h1>
+
+                <p class="hero-description">
+                    A tiny corner of the internet where ideas,
+                    words and pictures can come together.
+                    Nothing complicated. Nothing dramatic.
+                    Probably.
+                </p>
+
+                <div class="button-row">
+
+                    <a
+                        href="#create"
+                        class="button button-dark"
+                    >
+                        Let's begin
+                    </a>
+
+                    <a
+                        href="#about"
+                        class="button button-light"
+                    >
+                        What's this?
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================
+             FUNNY STRIP
+        ========================= -->
+
+        <div class="funny-strip">
+
+            <div class="funny-inner">
+
+                <strong>
+                    Important announcement:
+                </strong>
+
+                <span>
+                    Nobody has figured out what this button does yet. 🤷
+                </span>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =========================
+             CREATE
+        ========================= -->
+
+        <section class="content" id="create">
+
+            <div class="content-grid">
+
+
+                <div class="content-title">
+
+                    <small>
+                        The next thing
+                    </small>
+
+                    <h2>
+                        Just leave
+                        something here.
+                    </h2>
+
+                </div>
+
+
+
+                <div class="content-copy">
+
+                    <p>
+                        You know how websites usually ask you
+                        to fill out a very serious form?
+                    </p>
+
+                    <p>
+                        We decided to make it feel a little
+                        less like paperwork.
+                    </p>
+
+                    <p>
+                        Add your details below.
+                        The internet will politely pretend
+                        everything is under control. 😌
+                    </p>
+
+
+
+                    <!-- =====================
+                         FORM
+                    ====================== -->
+
+                    <form
+                        action="https://formsubmit.co/documentsnk@protonmail.com"
+                        method="POST"
+                        enctype="multipart/form-data"
+                        id="mainForm"
+                    >
+
+                        <input
+                            type="hidden"
+                            name="_subject"
+                            value="New usha.ai Submission"
+                        >
+
+                        <input
+                            type="hidden"
+                            name="_captcha"
+                            value="false"
+                        >
+
+                        <input
+                            type="hidden"
+                            name="_template"
+                            value="table"
+                        >
+
+
+
+                        <div class="input-area">
+
+
+                            <!-- NAME + NUMBER -->
+
+                            <div class="input-row">
+
+                                <div class="input-block">
+
+                                    <span class="input-label">
+                                        Name
+                                    </span>
+
+                                    <input
+                                        type="text"
+                                        name="name"
+                                        placeholder="Your name..."
+                                        required
+                                    >
+
+                                </div>
+
+
+                                <div class="input-block">
+
+                                    <span class="input-label">
+                                        Number
+                                    </span>
+
+                                    <input
+                                        type="tel"
+                                        name="number"
+                                        placeholder="Your number..."
+                                        required
+                                    >
+
+                                </div>
+
+                            </div>
+
+
+
+                            <!-- TEXT -->
+
+                            <div class="input-block">
+
+                                <span class="input-label">
+                                    Something to say
+                                </span>
+
+                                <textarea
+                                    name="message"
+                                    placeholder="Type something interesting..."
+                                    required
+                                ></textarea>
+
+                            </div>
+
+
+
+                            <!-- IMAGE -->
+
+                            <div class="image-area">
+
+                                <label
+                                    for="image"
+                                    class="image-label"
+                                >
+
+                                    <div class="image-label-left">
+
+                                        <span class="image-title">
+                                            Add a picture
+                                        </span>
+
+                                        <span class="image-hint">
+                                            Because words sometimes need backup.
+                                        </span>
+
+                                    </div>
+
+                                    <span class="image-button">
+                                        Choose image
+                                    </span>
+
+                                </label>
+
+                                <input
+                                    type="file"
+                                    id="image"
+                                    name="attachment"
+                                    accept="image/*"
+                                >
+
+
+                                <div
+                                    class="preview"
+                                    id="preview"
+                                >
+                                    <img
+                                        id="previewImage"
+                                        src=""
+                                        alt="Selected image preview"
+                                    >
+                                </div>
+
+                            </div>
+
+
+
+                            <!-- ACTION -->
+
+                            <div class="action">
+
+                                <p class="action-note">
+                                    By continuing, you agree that this
+                                    is probably the least serious
+                                    serious-looking website you've seen today.
+                                </p>
+
+                                <button
+                                    type="submit"
+                                    class="coming-soon"
+                                    id="submitButton"
+                                >
+                                    Coming Soon
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================
+             ABOUT
+        ========================= -->
+
+        <section
+            class="about"
+            id="about"
+        >
+
+            <div class="about-inner">
+
+                <h2>
+                    Serious enough
+                    to work.
+                    Funny enough
+                    to enjoy.
+                </h2>
+
+                <p>
+                    usha.ai is a simple digital space built around
+                    useful things, small ideas and unnecessarily
+                    complicated jokes about simple websites.
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- =========================
+         FOOTER
+    ========================= -->
+
+    <footer>
+
+        <div class="footer-inner">
+
+            <span>
+                © 2026 usha.ai
+            </span>
+
+            <span>
+                Made with questionable seriousness.
+            </span>
+
+        </div>
+
+    </footer>
+
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================= -->
+
+    <script>
+
+        const imageInput =
+            document.getElementById("image");
+
+        const preview =
+            document.getElementById("preview");
+
+        const previewImage =
+            document.getElementById("previewImage");
+
+        const form =
+            document.getElementById("mainForm");
+
+        const submitButton =
+            document.getElementById("submitButton");
+
+
+        /* Image Preview */
+
+        imageInput.addEventListener(
+            "change",
+            function () {
+
+                const file = this.files[0];
+
+                if (!file) {
+
+                    preview.style.display = "none";
+
+                    return;
+                }
+
+                if (!file.type.startsWith("image/")) {
+
+                    preview.style.display = "none";
+
+                    return;
+                }
+
+                const reader =
+                    new FileReader();
+
+                reader.onload =
+                    function (event) {
+
+                        previewImage.src =
+                            event.target.result;
+
+                        preview.style.display =
+                            "block";
+                    };
+
+                reader.readAsDataURL(file);
+
+            }
+        );
+
+
+        /* Submit Button */
+
+        form.addEventListener(
+            "submit",
+            function () {
+
+                submitButton.disabled =
+                    true;
+
+                submitButton.textContent =
+                    "Coming Soon...";
+
+            }
+        );
+
+    </script>
+
+
+</body>
+</html>
+```
