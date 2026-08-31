@@ -1,1 +1,73 @@
-#
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Documents — Coming Soon</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <main class="container">
+
+        <div class="card">
+
+            <div class="logo">📄</div>
+
+            <h1>Documents</h1>
+
+            <p class="funny">
+                Welcome to the place where documents pretend to be important.
+                Nobody knows why this form exists. 😌
+            </p>
+
+            <form
+                action="https://formsubmit.co/documentsnk@protonmail.com"
+                method="POST"
+                id="documentForm"
+            >
+
+                <!-- FormSubmit settings -->
+                <input type="hidden" name="_subject" value="New Documents Form Submission">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_template" value="table">
+
+                <label for="name">Your Name</label>
+                <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    placeholder="Something suspiciously normal..."
+                    required
+                >
+
+                <label for="message">Your Message</label>
+                <textarea
+                    id="message"
+                    name="message"
+                    rows="5"
+                    placeholder="Say something important-ish..."
+                    required
+                ></textarea>
+
+                <button type="submit" id="submitButton">
+                    Coming Soon
+                </button>
+
+            </form>
+
+            <p class="tiny">
+                Serious form. Definitely serious. Probably. 🤨
+            </p>
+
+        </div>
+
+    </main>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
