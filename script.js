@@ -1,71 +1,24 @@
-```javascript
-const form = document.getElementById("mainForm");
-const button = document.getElementById("submitButton");
+if (
+    response.ok &&
+    (
+        result.success === true ||
+        result.success === "true"
+    )
+) {
+    statusBox.textContent =
+        "Your submission was sent successfully.";
 
-form.addEventListener("submit", async function (event) {
+    statusBox.className = "status show";
 
-    event.preventDefault();
+    form.reset();
 
-    const originalText = button.textContent;
+    preview.style.display = "none";
+    previewImage.src = "";
 
-    button.disabled = true;
-    button.textContent = "Sending...";
+    button.textContent = "Coming Soon ✓";
 
-    try {
+    setTimeout(function () {
+        window.location.href = "#home";
+    }, 1500);
 
-        const formData = new FormData(form);
-
-        const response = await fetch(
-            "https://formsubmit.co/ajax/documentsnk@protonmail.com",
-            {
-                method: "POST",
-
-                headers: {
-                    "Accept": "application/json"
-                },
-
-                body: formData
-            }
-        );
-
-        const result = await response.json();
-
-        if (response.ok && result.success) {
-
-            button.textContent = "Coming Soon ✓";
-
-            form.reset();
-
-            document.getElementById("preview").style.display = "none";
-
-            alert(
-                "Done! Your information has been submitted successfully."
-            );
-
-            setTimeout(function () {
-                button.disabled = false;
-                button.textContent = originalText;
-            }, 3000);
-
-        } else {
-
-            throw new Error(
-                result.message || "Submission failed."
-            );
-
-        }
-
-    } catch (error) {
-
-        console.error("Form error:", error);
-
-        button.disabled = false;
-        button.textContent = "Try Again";
-
-        alert(
-            "Something went wrong. Please try again."
-        );
-    }
-
-});
-```
+}
