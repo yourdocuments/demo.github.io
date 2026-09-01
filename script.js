@@ -1,4 +1,3 @@
-```javascript
 /* =========================================================
    USHA.AI — SCRIPT.JS
    Form • Image Preview • AJAX • UX
