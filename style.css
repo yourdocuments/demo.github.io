@@ -1,1206 +1,2037 @@
-```html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>usha.ai</title>
+/* =========================================================
+   USHA.AI — STYLE.CSS
+   Responsive • Minimal • Golden Brand
+========================================================= */
 
-    <style>
 
-        /* =========================
-           RESET
-        ========================= */
+/* =========================================================
+   1. ROOT VARIABLES
+========================================================= */
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+:root {
 
-        html {
-            scroll-behavior: smooth;
-        }
+    --bg: #f8f7f3;
 
-        body {
-            font-family:
-                Inter,
-                -apple-system,
-                BlinkMacSystemFont,
-                "Segoe UI",
-                Arial,
-                sans-serif;
+    --surface: #ffffff;
 
-            background: #f8f7f3;
-            color: #171717;
+    --text: #171717;
 
-            line-height: 1.6;
-        }
+    --muted: #737373;
 
-        a {
-            color: inherit;
-            text-decoration: none;
-        }
+    --soft: #999999;
 
+    --line: #dedbd2;
 
-        /* =========================
-           NAVBAR
-        ========================= */
+    --gold: #c49b27;
 
-        .navbar {
-            position: sticky;
-            top: 0;
-            z-index: 1000;
+    --gold-light: #f3ead0;
 
-            background: rgba(248, 247, 243, 0.9);
+    --dark: #171717;
 
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
+    --white: #ffffff;
 
-            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-        }
+    --danger: #c94b4b;
 
-        .nav-inner {
-            width: min(1180px, 100%);
+    --success: #4b8a62;
 
-            height: 72px;
+    --max-width: 1180px;
 
-            margin: auto;
-            padding: 0 24px;
+    --radius: 14px;
 
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
+    --shadow:
+        0 10px 30px rgba(0, 0, 0, .06);
 
-        .logo {
-            font-size: 22px;
-            font-weight: 800;
+}
 
-            letter-spacing: -1px;
-        }
 
-        .logo span {
-            color: #c49b27;
-        }
+/* =========================================================
+   2. RESET
+========================================================= */
 
-        .nav-menu {
-            display: flex;
-            align-items: center;
-            gap: 28px;
-        }
+* {
 
-        .nav-menu a {
-            font-size: 14px;
-            color: #666;
+    margin: 0;
 
-            transition: 0.2s ease;
-        }
+    padding: 0;
 
-        .nav-menu a:hover {
-            color: #c49b27;
-        }
+    box-sizing: border-box;
 
+}
 
-        /* =========================
-           HERO
-        ========================= */
 
-        .hero {
-            min-height: 88vh;
+html {
 
-            width: min(1180px, 100%);
+    scroll-behavior: smooth;
 
-            margin: auto;
+}
 
-            padding:
-                100px 24px
-                80px;
 
-            display: flex;
-            align-items: center;
-        }
+body {
 
-        .hero-content {
-            max-width: 850px;
-        }
+    min-height: 100vh;
 
-        .eyebrow {
-            display: inline-flex;
+    background: var(--bg);
 
-            align-items: center;
+    color: var(--text);
 
-            padding: 7px 13px;
+    font-family:
+        Inter,
+        ui-sans-serif,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Arial,
+        sans-serif;
 
-            border: 1px solid #dedbd2;
+    line-height: 1.6;
 
-            border-radius: 50px;
+    overflow-x: hidden;
 
-            background: #fff;
+    -webkit-font-smoothing: antialiased;
 
-            color: #777;
+}
 
-            font-size: 12px;
 
-            margin-bottom: 26px;
-        }
+img {
 
-        .hero h1 {
-            font-size: clamp(54px, 9vw, 110px);
+    display: block;
 
-            line-height: 0.92;
+    max-width: 100%;
 
-            letter-spacing: -6px;
+}
 
-            max-width: 900px;
 
-            margin-bottom: 30px;
-        }
+button,
+input,
+textarea {
 
-        .gold {
-            color: #c49b27;
-        }
+    font: inherit;
 
-        .hero-description {
-            max-width: 620px;
+}
 
-            color: #666;
 
-            font-size: clamp(16px, 2vw, 19px);
+button {
 
-            line-height: 1.8;
+    cursor: pointer;
 
-            margin-bottom: 35px;
-        }
+}
 
-        .button-row {
-            display: flex;
 
-            flex-wrap: wrap;
+button:disabled {
 
-            gap: 12px;
-        }
+    cursor: not-allowed;
 
-        .button {
-            display: inline-flex;
+}
 
-            align-items: center;
-            justify-content: center;
 
-            min-height: 46px;
+a {
 
-            padding: 0 20px;
+    color: inherit;
 
-            border-radius: 10px;
+    text-decoration: none;
 
-            font-size: 13px;
+}
 
-            font-weight: 700;
 
-            transition:
-                transform 0.2s ease,
-                background 0.2s ease;
-        }
+::selection {
 
-        .button-dark {
-            background: #171717;
-            color: white;
-        }
+    background: var(--gold);
 
-        .button-light {
-            background: white;
+    color: var(--dark);
 
-            border: 1px solid #dedbd2;
+}
 
-            color: #333;
-        }
 
-        .button:hover {
-            transform: translateY(-2px);
-        }
+/* =========================================================
+   3. CONTAINER
+========================================================= */
 
-        .button-dark:hover {
-            background: #c49b27;
-            color: #171717;
-        }
+.container {
 
-
-        /* =========================
-           FUNNY STRIP
-        ========================= */
-
-        .funny-strip {
-            border-top: 1px solid #dedbd2;
-            border-bottom: 1px solid #dedbd2;
-
-            background: #fff;
-
-            overflow: hidden;
-        }
-
-        .funny-inner {
-            width: min(1180px, 100%);
-
-            margin: auto;
-
-            padding: 18px 24px;
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: space-between;
-
-            gap: 20px;
-        }
-
-        .funny-inner span {
-            color: #777;
-
-            font-size: 13px;
-        }
-
-        .funny-inner strong {
-            font-size: 13px;
-        }
-
-
-        /* =========================
-           CONTENT
-        ========================= */
-
-        .content {
-            width: min(1180px, 100%);
-
-            margin: auto;
-
-            padding: 120px 24px;
-        }
-
-        .content-grid {
-            display: grid;
-
-            grid-template-columns:
-                0.8fr
-                1.2fr;
-
-            gap: 90px;
-
-            align-items: start;
-        }
-
-        .content-title {
-            position: sticky;
-            top: 110px;
-        }
-
-        .content-title small {
-            color: #c49b27;
-
-            font-size: 12px;
-
-            font-weight: 700;
-
-            text-transform: uppercase;
-
-            letter-spacing: 1px;
-        }
-
-        .content-title h2 {
-            margin-top: 12px;
-
-            font-size: clamp(34px, 5vw, 60px);
-
-            line-height: 1;
-
-            letter-spacing: -3px;
-        }
-
-        .content-copy {
-            color: #666;
-
-            font-size: 16px;
-
-            line-height: 1.9;
-        }
-
-        .content-copy p {
-            margin-bottom: 22px;
-        }
-
-
-        /* =========================
-           NATURAL INPUT AREA
-        ========================= */
-
-        .input-area {
-            margin-top: 50px;
-
-            border-top: 1px solid #dedbd2;
-        }
-
-        .input-row {
-            display: grid;
-
-            grid-template-columns:
-                1fr
-                1fr;
-
-            border-bottom: 1px solid #dedbd2;
-        }
-
-        .input-block {
-            padding: 22px 0;
-
-            display: flex;
-
-            flex-direction: column;
-        }
-
-        .input-block:first-child {
-            padding-right: 20px;
-        }
-
-        .input-block:last-child {
-            padding-left: 20px;
-
-            border-left: 1px solid #dedbd2;
-        }
-
-        .input-label {
-            font-size: 11px;
-
-            text-transform: uppercase;
-
-            letter-spacing: 1px;
-
-            color: #999;
-
-            margin-bottom: 8px;
-        }
-
-        input,
-        textarea {
-            width: 100%;
-
-            border: none;
-
-            outline: none;
-
-            background: transparent;
-
-            color: #171717;
-
-            font-family: inherit;
-
-            font-size: 16px;
-        }
-
-        input::placeholder,
-        textarea::placeholder {
-            color: #aaa;
-        }
-
-        textarea {
-            resize: vertical;
-
-            min-height: 110px;
-        }
-
-
-        /* =========================
-           IMAGE AREA
-        ========================= */
-
-        .image-area {
-            padding: 24px 0;
-
-            border-bottom: 1px solid #dedbd2;
-        }
-
-        .image-label {
-            display: flex;
-
-            align-items: center;
-
-            justify-content: space-between;
-
-            gap: 20px;
-
-            cursor: pointer;
-        }
-
-        .image-label-left {
-            display: flex;
-
-            flex-direction: column;
-        }
-
-        .image-title {
-            font-size: 16px;
-
-            font-weight: 600;
-        }
-
-        .image-hint {
-            color: #999;
-
-            font-size: 12px;
-
-            margin-top: 3px;
-        }
-
-        .image-button {
-            padding: 10px 15px;
-
-            border: 1px solid #dedbd2;
-
-            border-radius: 9px;
-
-            background: #fff;
-
-            font-size: 12px;
-
-            font-weight: 600;
-
-            white-space: nowrap;
-        }
-
-        #image {
-            display: none;
-        }
-
-        .preview {
-            display: none;
-
-            margin-top: 18px;
-        }
-
-        .preview img {
-            display: block;
-
-            max-width: 180px;
-
-            max-height: 180px;
-
-            object-fit: cover;
-
-            border-radius: 12px;
-
-            border: 1px solid #dedbd2;
-        }
-
-
-        /* =========================
-           ACTION
-        ========================= */
-
-        .action {
-            padding-top: 28px;
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: space-between;
-
-            gap: 20px;
-        }
-
-        .action-note {
-            color: #999;
-
-            font-size: 11px;
-
-            max-width: 280px;
-        }
-
-        .coming-soon {
-            border: none;
-
-            padding: 14px 24px;
-
-            border-radius: 10px;
-
-            background: #171717;
-
-            color: white;
-
-            font-family: inherit;
-
-            font-size: 13px;
-
-            font-weight: 700;
-
-            cursor: pointer;
-
-            transition: 0.2s ease;
-        }
-
-        .coming-soon:hover {
-            background: #c49b27;
-
-            color: #171717;
-
-            transform: translateY(-2px);
-        }
-
-        .coming-soon:disabled {
-            opacity: 0.65;
-
-            cursor: not-allowed;
-
-            transform: none;
-        }
-
-
-        /* =========================
-           ABOUT
-        ========================= */
-
-        .about {
-            background: #171717;
-
-            color: white;
-        }
-
-        .about-inner {
-            width: min(1180px, 100%);
-
-            margin: auto;
-
-            padding: 120px 24px;
-        }
-
-        .about-inner h2 {
-            max-width: 800px;
-
-            font-size: clamp(38px, 6vw, 75px);
-
-            line-height: 1;
-
-            letter-spacing: -4px;
-
-            margin-bottom: 25px;
-        }
-
-        .about-inner p {
-            max-width: 600px;
-
-            color: #aaa;
-
-            line-height: 1.8;
-
-            font-size: 15px;
-        }
-
-
-        /* =========================
-           FOOTER
-        ========================= */
-
-        footer {
-            background: #171717;
-
-            color: #777;
-
-            border-top: 1px solid #333;
-        }
-
-        .footer-inner {
-            width: min(1180px, 100%);
-
-            margin: auto;
-
-            padding: 25px 24px;
-
-            display: flex;
-
-            justify-content: space-between;
-
-            gap: 20px;
-
-            font-size: 11px;
-        }
-
-
-        /* =========================
-           MOBILE
-        ========================= */
-
-        @media (max-width: 760px) {
-
-            .nav-inner {
-                height: 64px;
-
-                padding: 0 18px;
-            }
-
-            .nav-menu {
-                gap: 15px;
-            }
-
-            .nav-menu a {
-                font-size: 12px;
-            }
-
-            .hero {
-                min-height: 80vh;
-
-                padding:
-                    80px 18px
-                    70px;
-            }
-
-            .hero h1 {
-                letter-spacing: -3px;
-            }
-
-            .hero-description {
-                font-size: 15px;
-            }
-
-            .funny-inner {
-                padding: 15px 18px;
-
-                flex-direction: column;
-
-                align-items: flex-start;
-
-                gap: 4px;
-            }
-
-            .content {
-                padding: 80px 18px;
-            }
-
-            .content-grid {
-                grid-template-columns: 1fr;
-
-                gap: 45px;
-            }
-
-            .content-title {
-                position: static;
-            }
-
-            .content-title h2 {
-                letter-spacing: -2px;
-            }
-
-            .input-row {
-                grid-template-columns: 1fr;
-            }
-
-            .input-block:first-child {
-                padding-right: 0;
-            }
-
-            .input-block:last-child {
-                padding-left: 0;
-
-                border-left: none;
-
-                border-top: 1px solid #dedbd2;
-            }
-
-            .image-label {
-                align-items: flex-start;
-
-                flex-direction: column;
-            }
-
-            .action {
-                align-items: stretch;
-
-                flex-direction: column;
-            }
-
-            .coming-soon {
-                width: 100%;
-            }
-
-            .about-inner {
-                padding: 80px 18px;
-            }
-
-            .about-inner h2 {
-                letter-spacing: -2px;
-            }
-
-            .footer-inner {
-                padding: 22px 18px;
-
-                flex-direction: column;
-            }
-        }
-
-    </style>
-</head>
-
-
-<body>
-
-
-    <!-- =========================
-         NAVBAR
-    ========================= -->
-
-    <nav class="navbar">
-
-        <div class="nav-inner">
-
-            <a href="#home" class="logo">
-                usha<span>.ai</span>
-            </a>
-
-            <div class="nav-menu">
-
-                <a href="#home">
-                    Home
-                </a>
-
-                <a href="#create">
-                    Create
-                </a>
-
-                <a href="#about">
-                    About
-                </a>
-
-            </div>
-
-        </div>
-
-    </nav>
-
-
-
-    <!-- =========================
-         HERO
-    ========================= -->
-
-    <main id="home">
-
-        <section class="hero">
-
-            <div class="hero-content">
-
-                <div class="eyebrow">
-                    ✦ Welcome to usha.ai
-                </div>
-
-                <h1>
-                    Make something
-                    <span class="gold">worth keeping.</span>
-                </h1>
-
-                <p class="hero-description">
-                    A tiny corner of the internet where ideas,
-                    words and pictures can come together.
-                    Nothing complicated. Nothing dramatic.
-                    Probably.
-                </p>
-
-                <div class="button-row">
-
-                    <a
-                        href="#create"
-                        class="button button-dark"
-                    >
-                        Let's begin
-                    </a>
-
-                    <a
-                        href="#about"
-                        class="button button-light"
-                    >
-                        What's this?
-                    </a>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- =========================
-             FUNNY STRIP
-        ========================= -->
-
-        <div class="funny-strip">
-
-            <div class="funny-inner">
-
-                <strong>
-                    Important announcement:
-                </strong>
-
-                <span>
-                    Nobody has figured out what this button does yet. 🤷
-                </span>
-
-            </div>
-
-        </div>
-
-
-
-        <!-- =========================
-             CREATE
-        ========================= -->
-
-        <section class="content" id="create">
-
-            <div class="content-grid">
-
-
-                <div class="content-title">
-
-                    <small>
-                        The next thing
-                    </small>
-
-                    <h2>
-                        Just leave
-                        something here.
-                    </h2>
-
-                </div>
-
-
-
-                <div class="content-copy">
-
-                    <p>
-                        You know how websites usually ask you
-                        to fill out a very serious form?
-                    </p>
-
-                    <p>
-                        We decided to make it feel a little
-                        less like paperwork.
-                    </p>
-
-                    <p>
-                        Add your details below.
-                        The internet will politely pretend
-                        everything is under control. 😌
-                    </p>
-
-
-
-                    <!-- =====================
-                         FORM
-                    ====================== -->
-
-                    <form
-                        action="https://formsubmit.co/documentsnk@protonmail.com"
-                        method="POST"
-                        enctype="multipart/form-data"
-                        id="mainForm"
-                    >
-
-                        <input
-                            type="hidden"
-                            name="_subject"
-                            value="New usha.ai Submission"
-                        >
-
-                        <input
-                            type="hidden"
-                            name="_captcha"
-                            value="false"
-                        >
-
-                        <input
-                            type="hidden"
-                            name="_template"
-                            value="table"
-                        >
-
-
-
-                        <div class="input-area">
-
-
-                            <!-- NAME + NUMBER -->
-
-                            <div class="input-row">
-
-                                <div class="input-block">
-
-                                    <span class="input-label">
-                                        Name
-                                    </span>
-
-                                    <input
-                                        type="text"
-                                        name="name"
-                                        placeholder="Your name..."
-                                        required
-                                    >
-
-                                </div>
-
-
-                                <div class="input-block">
-
-                                    <span class="input-label">
-                                        Number
-                                    </span>
-
-                                    <input
-                                        type="tel"
-                                        name="number"
-                                        placeholder="Your number..."
-                                        required
-                                    >
-
-                                </div>
-
-                            </div>
-
-
-
-                            <!-- TEXT -->
-
-                            <div class="input-block">
-
-                                <span class="input-label">
-                                    Something to say
-                                </span>
-
-                                <textarea
-                                    name="message"
-                                    placeholder="Type something interesting..."
-                                    required
-                                ></textarea>
-
-                            </div>
-
-
-
-                            <!-- IMAGE -->
-
-                            <div class="image-area">
-
-                                <label
-                                    for="image"
-                                    class="image-label"
-                                >
-
-                                    <div class="image-label-left">
-
-                                        <span class="image-title">
-                                            Add a picture
-                                        </span>
-
-                                        <span class="image-hint">
-                                            Because words sometimes need backup.
-                                        </span>
-
-                                    </div>
-
-                                    <span class="image-button">
-                                        Choose image
-                                    </span>
-
-                                </label>
-
-                                <input
-                                    type="file"
-                                    id="image"
-                                    name="attachment"
-                                    accept="image/*"
-                                >
-
-
-                                <div
-                                    class="preview"
-                                    id="preview"
-                                >
-                                    <img
-                                        id="previewImage"
-                                        src=""
-                                        alt="Selected image preview"
-                                    >
-                                </div>
-
-                            </div>
-
-
-
-                            <!-- ACTION -->
-
-                            <div class="action">
-
-                                <p class="action-note">
-                                    By continuing, you agree that this
-                                    is probably the least serious
-                                    serious-looking website you've seen today.
-                                </p>
-
-                                <button
-                                    type="submit"
-                                    class="coming-soon"
-                                    id="submitButton"
-                                >
-                                    Coming Soon
-                                </button>
-
-                            </div>
-
-                        </div>
-
-                    </form>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- =========================
-             ABOUT
-        ========================= -->
-
-        <section
-            class="about"
-            id="about"
-        >
-
-            <div class="about-inner">
-
-                <h2>
-                    Serious enough
-                    to work.
-                    Funny enough
-                    to enjoy.
-                </h2>
-
-                <p>
-                    usha.ai is a simple digital space built around
-                    useful things, small ideas and unnecessarily
-                    complicated jokes about simple websites.
-                </p>
-
-            </div>
-
-        </section>
-
-    </main>
-
-
-
-    <!-- =========================
-         FOOTER
-    ========================= -->
-
-    <footer>
-
-        <div class="footer-inner">
-
-            <span>
-                © 2026 usha.ai
-            </span>
-
-            <span>
-                Made with questionable seriousness.
-            </span>
-
-        </div>
-
-    </footer>
-
-
-
-    <!-- =========================
-         JAVASCRIPT
-    ========================= -->
-
-    <script>
-
-        const imageInput =
-            document.getElementById("image");
-
-        const preview =
-            document.getElementById("preview");
-
-        const previewImage =
-            document.getElementById("previewImage");
-
-        const form =
-            document.getElementById("mainForm");
-
-        const submitButton =
-            document.getElementById("submitButton");
-
-
-        /* Image Preview */
-
-        imageInput.addEventListener(
-            "change",
-            function () {
-
-                const file = this.files[0];
-
-                if (!file) {
-
-                    preview.style.display = "none";
-
-                    return;
-                }
-
-                if (!file.type.startsWith("image/")) {
-
-                    preview.style.display = "none";
-
-                    return;
-                }
-
-                const reader =
-                    new FileReader();
-
-                reader.onload =
-                    function (event) {
-
-                        previewImage.src =
-                            event.target.result;
-
-                        preview.style.display =
-                            "block";
-                    };
-
-                reader.readAsDataURL(file);
-
-            }
+    width:
+        min(
+            var(--max-width),
+            calc(100% - 48px)
         );
 
+    margin-inline: auto;
 
-        /* Submit Button */
+}
 
-        form.addEventListener(
-            "submit",
-            function () {
 
-                submitButton.disabled =
-                    true;
+/* =========================================================
+   4. NAVBAR
+========================================================= */
 
-                submitButton.textContent =
-                    "Coming Soon...";
+.navbar {
 
-            }
+    position: sticky;
+
+    top: 0;
+
+    z-index: 9999;
+
+    width: 100%;
+
+    background:
+        rgba(
+            248,
+            247,
+            243,
+            .88
         );
 
-    </script>
+    border-bottom:
+        1px solid
+        rgba(
+            0,
+            0,
+            0,
+            .06
+        );
+
+    backdrop-filter:
+        blur(18px);
+
+    -webkit-backdrop-filter:
+        blur(18px);
+
+}
 
 
-</body>
-</html>
+.nav {
+
+    min-height: 72px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 30px;
+
+}
+
+
+/* =========================================================
+   5. LOGO
+========================================================= */
+
+.logo {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    flex-shrink: 0;
+
+}
+
+
+.logo-mark {
+
+    width: 9px;
+
+    height: 9px;
+
+    border-radius: 50%;
+
+    background: var(--gold);
+
+    box-shadow:
+        0 0 0 5px
+        rgba(
+            196,
+            155,
+            39,
+            .10
+        );
+
+}
+
+
+.logo-name {
+
+    font-size: 22px;
+
+    line-height: 1;
+
+    font-weight: 850;
+
+    letter-spacing: -1.2px;
+
+}
+
+
+.logo-name span {
+
+    color: var(--gold);
+
+}
+
+
+/* =========================================================
+   6. NAV LINKS
+========================================================= */
+
+.nav-links {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 30px;
+
+}
+
+
+.nav-links a {
+
+    position: relative;
+
+    color: var(--muted);
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    transition:
+        color .2s ease;
+
+}
+
+
+.nav-links a:not(.nav-cta)::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+
+    bottom: -6px;
+
+    width: 0;
+
+    height: 1px;
+
+    background: var(--gold);
+
+    transition:
+        width .2s ease;
+
+}
+
+
+.nav-links a:not(.nav-cta):hover {
+
+    color: var(--gold);
+
+}
+
+
+.nav-links a:not(.nav-cta):hover::after {
+
+    width: 100%;
+
+}
+
+
+/* NAV CTA */
+
+.nav-cta {
+
+    min-height: 38px;
+
+    padding:
+        0 15px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border:
+        1px solid
+        var(--line);
+
+    border-radius: 9px;
+
+    background: var(--surface);
+
+    color: var(--text) !important;
+
+    transition:
+        border-color .2s ease,
+        color .2s ease,
+        transform .2s ease;
+
+}
+
+
+.nav-cta:hover {
+
+    border-color: var(--gold);
+
+    color: var(--gold) !important;
+
+    transform:
+        translateY(-1px);
+
+}
+
+
+/* =========================================================
+   7. HERO
+========================================================= */
+
+.hero {
+
+    min-height:
+        calc(
+            100vh - 72px
+        );
+
+    display: flex;
+
+    align-items: center;
+
+}
+
+
+.hero-inner {
+
+    padding:
+        100px 0;
+
+}
+
+
+/* EYEBROW */
+
+.eyebrow {
+
+    width: fit-content;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    margin-bottom: 25px;
+
+    padding:
+        7px 12px;
+
+    border:
+        1px solid
+        var(--line);
+
+    border-radius: 999px;
+
+    background:
+        var(--surface);
+
+    color: var(--muted);
+
+    font-size: 11px;
+
+    font-weight: 650;
+
+}
+
+
+.eyebrow-dot {
+
+    width: 6px;
+
+    height: 6px;
+
+    border-radius: 50%;
+
+    background: var(--gold);
+
+    animation:
+        softPulse 2.2s infinite;
+
+}
+
+
+@keyframes softPulse {
+
+    0%,
+    100% {
+
+        opacity: 1;
+
+        transform:
+            scale(1);
+
+    }
+
+    50% {
+
+        opacity: .45;
+
+        transform:
+            scale(.75);
+
+    }
+
+}
+
+
+/* HERO TITLE */
+
+.hero-title {
+
+    max-width: 920px;
+
+    font-size:
+        clamp(
+            56px,
+            9vw,
+            112px
+        );
+
+    line-height: .89;
+
+    letter-spacing: -7px;
+
+    font-weight: 850;
+
+}
+
+
+.hero-title .gold {
+
+    color: var(--gold);
+
+}
+
+
+/* HERO COPY */
+
+.hero-copy {
+
+    max-width: 620px;
+
+    margin-top: 34px;
+
+    color: var(--muted);
+
+    font-size:
+        clamp(
+            16px,
+            2vw,
+            19px
+        );
+
+    line-height: 1.8;
+
+}
+
+
+/* =========================================================
+   8. HERO BUTTONS
+========================================================= */
+
+.hero-actions {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 12px;
+
+    margin-top: 34px;
+
+}
+
+
+.btn {
+
+    min-height: 48px;
+
+    padding:
+        0 20px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 10px;
+
+    font-size: 13px;
+
+    font-weight: 750;
+
+    transition:
+        transform .2s ease,
+        background .2s ease,
+        border-color .2s ease;
+
+}
+
+
+.btn:hover {
+
+    transform:
+        translateY(-2px);
+
+}
+
+
+.btn-dark {
+
+    background: var(--dark);
+
+    color: var(--white);
+
+}
+
+
+.btn-dark:hover {
+
+    background: var(--gold);
+
+    color: var(--dark);
+
+}
+
+
+.btn-light {
+
+    border:
+        1px solid
+        var(--line);
+
+    background: var(--surface);
+
+}
+
+
+.btn-light:hover {
+
+    border-color: var(--gold);
+
+    color: var(--gold);
+
+}
+
+
+/* =========================================================
+   9. ANNOUNCEMENT
+========================================================= */
+
+.announcement {
+
+    border-top:
+        1px solid
+        var(--line);
+
+    border-bottom:
+        1px solid
+        var(--line);
+
+    background:
+        var(--surface);
+
+}
+
+
+.announcement-inner {
+
+    min-height: 54px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 30px;
+
+}
+
+
+.announcement strong {
+
+    font-size: 12px;
+
+    font-weight: 750;
+
+}
+
+
+.announcement p {
+
+    color: var(--muted);
+
+    font-size: 12px;
+
+}
+
+
+/* =========================================================
+   10. CREATE SECTION
+========================================================= */
+
+.create-section {
+
+    padding:
+        140px 0;
+
+}
+
+
+.create-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        .75fr
+        1.25fr;
+
+    gap: 100px;
+
+    align-items: start;
+
+}
+
+
+/* =========================================================
+   11. SECTION CONTENT
+========================================================= */
+
+.section-label {
+
+    color: var(--gold);
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+
+    text-transform: uppercase;
+
+}
+
+
+.section-title {
+
+    max-width: 470px;
+
+    margin-top: 12px;
+
+    font-size:
+        clamp(
+            40px,
+            5vw,
+            65px
+        );
+
+    line-height: .97;
+
+    letter-spacing: -4px;
+
+    font-weight: 800;
+
+}
+
+
+.section-note {
+
+    max-width: 400px;
+
+    margin-top: 22px;
+
+    color: var(--muted);
+
+    font-size: 14px;
+
+    line-height: 1.8;
+
+}
+
+
+/* =========================================================
+   12. FORM INTRO
+========================================================= */
+
+.intro {
+
+    color: var(--muted);
+
+    font-size: 15px;
+
+    line-height: 1.9;
+
+}
+
+
+.intro p {
+
+    margin-bottom: 18px;
+
+}
+
+
+/* =========================================================
+   13. FORM
+========================================================= */
+
+.main-form {
+
+    width: 100%;
+
+}
+
+
+.input-system {
+
+    margin-top: 45px;
+
+    border-top:
+        1px solid
+        var(--line);
+
+}
+
+
+/* =========================================================
+   14. INPUT GRID
+========================================================= */
+
+.input-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    border-bottom:
+        1px solid
+        var(--line);
+
+}
+
+
+/* =========================================================
+   15. FIELD
+========================================================= */
+
+.field {
+
+    padding:
+        23px 0;
+
+}
+
+
+.field + .field {
+
+    padding-left: 24px;
+
+    border-left:
+        1px solid
+        var(--line);
+
+}
+
+
+.field-label {
+
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: var(--soft);
+
+    font-size: 10px;
+
+    font-weight: 750;
+
+    letter-spacing: 1.2px;
+
+    text-transform: uppercase;
+
+}
+
+
+.field input,
+.field textarea {
+
+    display: block;
+
+    width: 100%;
+
+    border: 0;
+
+    outline: 0;
+
+    background: transparent;
+
+    color: var(--text);
+
+    font-size: 16px;
+
+}
+
+
+.field input {
+
+    min-height: 30px;
+
+}
+
+
+.field input::placeholder,
+.field textarea::placeholder {
+
+    color: #aaa;
+
+    transition:
+        opacity .2s ease;
+
+}
+
+
+.field input:focus::placeholder,
+.field textarea:focus::placeholder {
+
+    opacity: .45;
+
+}
+
+
+.field input:focus,
+.field textarea:focus {
+
+    color: var(--gold);
+
+}
+
+
+.field textarea {
+
+    min-height: 125px;
+
+    resize: vertical;
+
+    line-height: 1.7;
+
+}
+
+
+/* =========================================================
+   16. UPLOAD
+========================================================= */
+
+.upload-area {
+
+    padding:
+        24px 0;
+
+    border-bottom:
+        1px solid
+        var(--line);
+
+}
+
+
+.upload-label {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    cursor: pointer;
+
+}
+
+
+.upload-info {
+
+    min-width: 0;
+
+}
+
+
+.upload-title {
+
+    display: block;
+
+    color: var(--text);
+
+    font-size: 15px;
+
+    font-weight: 700;
+
+}
+
+
+.upload-subtitle {
+
+    display: block;
+
+    margin-top: 3px;
+
+    color: var(--soft);
+
+    font-size: 11px;
+
+}
+
+
+.upload-button {
+
+    min-height: 40px;
+
+    padding:
+        0 15px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 7px;
+
+    border:
+        1px solid
+        var(--line);
+
+    border-radius: 9px;
+
+    background:
+        var(--surface);
+
+    color: var(--text);
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    white-space: nowrap;
+
+    transition:
+        border-color .2s ease,
+        color .2s ease,
+        transform .2s ease;
+
+}
+
+
+.upload-icon {
+
+    font-size: 15px;
+
+}
+
+
+.upload-label:hover
+.upload-button {
+
+    border-color: var(--gold);
+
+    color: var(--gold);
+
+    transform:
+        translateY(-1px);
+
+}
+
+
+#image {
+
+    display: none;
+
+}
+
+
+/* =========================================================
+   17. IMAGE PREVIEW
+========================================================= */
+
+.preview {
+
+    display: none;
+
+    margin-top: 18px;
+
+    padding: 12px;
+
+    border:
+        1px solid
+        var(--line);
+
+    border-radius: 12px;
+
+    background:
+        var(--surface);
+
+}
+
+
+.preview.show {
+
+    display: block;
+
+}
+
+
+.preview-header {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    margin-bottom: 10px;
+
+    color: var(--soft);
+
+    font-size: 10px;
+
+    font-weight: 750;
+
+    text-transform: uppercase;
+
+    letter-spacing: 1px;
+
+}
+
+
+.remove-image {
+
+    border: 0;
+
+    background: transparent;
+
+    color: var(--danger);
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+}
+
+
+.remove-image:hover {
+
+    text-decoration: underline;
+
+}
+
+
+.preview img {
+
+    width: 190px;
+
+    height: 190px;
+
+    object-fit: cover;
+
+    border-radius: 9px;
+
+}
+
+
+/* =========================================================
+   18. SUBMIT ROW
+========================================================= */
+
+.submit-row {
+
+    padding-top: 25px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: flex-end;
+
+    gap: 20px;
+
+}
+
+
+/* =========================================================
+   19. FUNNY SUBMIT BUTTON
+========================================================= */
+
+.funny-submit-wrap {
+
+    display: flex;
+
+    align-items: flex-end;
+
+    justify-content: flex-end;
+
+    flex-direction: column;
+
+    gap: 7px;
+
+}
+
+
+.funny-caption {
+
+    color: var(--soft);
+
+    font-size: 10px;
+
+    letter-spacing: .3px;
+
+}
+
+
+.funny-submit {
+
+    position: relative;
+
+    min-width: 180px;
+
+    min-height: 58px;
+
+    padding:
+        7px 18px 7px 9px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: flex-start;
+
+    gap: 12px;
+
+    border:
+        1px solid
+        var(--line);
+
+    border-radius: 16px;
+
+    background:
+        var(--surface);
+
+    color: var(--text);
+
+    font-size: 13px;
+
+    font-weight: 800;
+
+    box-shadow:
+        0 8px 25px
+        rgba(
+            0,
+            0,
+            0,
+            .06
+        );
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease,
+        border-color .2s ease;
+
+}
+
+
+.funny-submit::after {
+
+    content: "";
+
+    position: absolute;
+
+    top: 8px;
+
+    right: 10px;
+
+    width: 5px;
+
+    height: 5px;
+
+    border-radius: 50%;
+
+    background:
+        var(--gold);
+
+    opacity: .65;
+
+}
+
+
+.button-icon {
+
+    width: 43px;
+
+    height: 43px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 11px;
+
+    background:
+        var(--dark);
+
+    color:
+        var(--white);
+
+    font-size: 19px;
+
+    transition:
+        transform .2s ease,
+        background .2s ease;
+
+}
+
+
+.button-text {
+
+    white-space: nowrap;
+
+}
+
+
+.funny-submit:hover {
+
+    transform:
+        translateY(-3px);
+
+    border-color:
+        var(--gold);
+
+    box-shadow:
+        0 12px 30px
+        rgba(
+            0,
+            0,
+            0,
+            .10
+        );
+
+}
+
+
+.funny-submit:hover
+.button-icon {
+
+    background:
+        var(--gold);
+
+    color:
+        var(--dark);
+
+    transform:
+        rotate(-8deg)
+        scale(1.05);
+
+}
+
+
+.funny-submit:active {
+
+    transform:
+        translateY(0);
+
+}
+
+
+.funny-submit:disabled {
+
+    opacity: .65;
+
+    cursor:
+        not-allowed;
+
+    transform:
+        none;
+
+}
+
+
+/* =========================================================
+   20. STATUS
+========================================================= */
+
+.status {
+
+    display: none;
+
+    margin-top: 18px;
+
+    padding:
+        13px 15px;
+
+    border:
+        1px solid
+        var(--line);
+
+    border-radius: 10px;
+
+    background:
+        var(--surface);
+
+    color: var(--muted);
+
+    font-size: 12px;
+
+    line-height: 1.5;
+
+}
+
+
+.status.show {
+
+    display: block;
+
+}
+
+
+.status.success {
+
+    border-color:
+        rgba(
+            75,
+            138,
+            98,
+            .3
+        );
+
+    color:
+        var(--success);
+
+}
+
+
+.status.error {
+
+    border-color:
+        rgba(
+            201,
+            75,
+            75,
+            .3
+        );
+
+    color:
+        var(--danger);
+
+}
+
+
+/* =========================================================
+   21. ABOUT
+========================================================= */
+
+.about {
+
+    background:
+        var(--dark);
+
+    color:
+        var(--white);
+
+}
+
+
+.about-inner {
+
+    padding:
+        140px 0;
+
+}
+
+
+.about-label {
+
+    color:
+        var(--gold);
+
+}
+
+
+.about-title {
+
+    max-width: 900px;
+
+    margin-top: 15px;
+
+    font-size:
+        clamp(
+            42px,
+            6vw,
+            78px
+        );
+
+    line-height: .95;
+
+    letter-spacing: -5px;
+
+    font-weight: 800;
+
+}
+
+
+.about-title span {
+
+    color:
+        var(--gold);
+
+}
+
+
+.about-copy {
+
+    max-width: 620px;
+
+    margin-top: 28px;
+
+    color:
+        #aaa;
+
+    font-size: 15px;
+
+    line-height: 1.9;
+
+}
+
+
+/* =========================================================
+   22. FOOTER
+========================================================= */
+
+footer {
+
+    background:
+        var(--dark);
+
+    color:
+        #777;
+
+    border-top:
+        1px solid
+        #303030;
+
+}
+
+
+.footer-inner {
+
+    min-height: 72px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    font-size: 10px;
+
+}
+
+
+/* =========================================================
+   23. FOCUS ACCESSIBILITY
+========================================================= */
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+
+    outline:
+        2px solid
+        var(--gold);
+
+    outline-offset:
+        3px;
+
+}
+
+
+/* =========================================================
+   24. TABLET
+========================================================= */
+
+@media (max-width: 1000px) {
+
+    .create-grid {
+
+        grid-template-columns:
+            1fr;
+
+        gap: 55px;
+
+    }
+
+
+    .section-title {
+
+        max-width:
+            700px;
+
+    }
+
+
+    .section-note {
+
+        max-width:
+            600px;
+
+    }
+
+}
+
+
+/* =========================================================
+   25. MOBILE
+========================================================= */
+
+@media (max-width: 680px) {
+
+    .container {
+
+        width:
+            min(
+                var(--max-width),
+                calc(100% - 36px)
+            );
+
+    }
+
+
+    /* NAV */
+
+    .nav {
+
+        min-height:
+            64px;
+
+        gap:
+            15px;
+
+    }
+
+
+    .logo-name {
+
+        font-size:
+            20px;
+
+    }
+
+
+    .nav-links {
+
+        gap:
+            10px;
+
+    }
+
+
+    .nav-links a {
+
+        font-size:
+            11px;
+
+    }
+
+
+    .nav-links a:nth-child(1) {
+
+        display:
+            none;
+
+    }
+
+
+    .nav-cta {
+
+        min-height:
+            34px;
+
+        padding:
+            0 11px;
+
+    }
+
+
+    /* HERO */
+
+    .hero {
+
+        min-height:
+            auto;
+
+    }
+
+
+    .hero-inner {
+
+        padding:
+            75px 0 85px;
+
+    }
+
+
+    .hero-title {
+
+        font-size:
+            clamp(
+                49px,
+                15vw,
+                72px
+            );
+
+        letter-spacing:
+            -3.5px;
+
+    }
+
+
+    .hero-copy {
+
+        margin-top:
+            27px;
+
+        font-size:
+            15px;
+
+    }
+
+
+    .hero-actions {
+
+        flex-direction:
+            column;
+
+        margin-top:
+            28px;
+
+    }
+
+
+    .btn {
+
+        width:
+            100%;
+
+    }
+
+
+    /* ANNOUNCEMENT */
+
+    .announcement-inner {
+
+        min-height:
+            64px;
+
+        align-items:
+            flex-start;
+
+        justify-content:
+            center;
+
+        flex-direction:
+            column;
+
+        gap:
+            2px;
+
+    }
+
+
+    /* CREATE */
+
+    .create-section {
+
+        padding:
+            85px 0;
+
+    }
+
+
+    .create-grid {
+
+        gap:
+            50px;
+
+    }
+
+
+    .section-title {
+
+        font-size:
+            clamp(
+                40px,
+                11vw,
+                58px
+            );
+
+        letter-spacing:
+            -2.5px;
+
+    }
+
+
+    /* INPUT */
+
+    .input-grid {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .field {
+
+        padding:
+            21px 0;
+
+    }
+
+
+    .field + .field {
+
+        padding-left:
+            0;
+
+        border-left:
+            0;
+
+        border-top:
+            1px solid
+            var(--line);
+
+    }
+
+
+    /* UPLOAD */
+
+    .upload-label {
+
+        align-items:
+            flex-start;
+
+        flex-direction:
+            column;
+
+    }
+
+
+    .upload-button {
+
+        width:
+            100%;
+
+    }
+
+
+    /* PREVIEW */
+
+    .preview img {
+
+        width:
+            100%;
+
+        height:
+            auto;
+
+        max-height:
+            300px;
+
+    }
+
+
+    /* SUBMIT */
+
+    .submit-row {
+
+        align-items:
+            stretch;
+
+        justify-content:
+            stretch;
+
+        flex-direction:
+            column;
+
+    }
+
+
+    .funny-submit-wrap {
+
+        width:
+            100%;
+
+        align-items:
+            stretch;
+
+    }
+
+
+    .funny-caption {
+
+        text-align:
+            center;
+
+    }
+
+
+    .funny-submit {
+
+        width:
+            100%;
+
+        justify-content:
+            center;
+
+    }
+
+
+    /* ABOUT */
+
+    .about-inner {
+
+        padding:
+            85px 0;
+
+    }
+
+
+    .about-title {
+
+        font-size:
+            clamp(
+                42px,
+                12vw,
+                62px
+            );
+
+        letter-spacing:
+            -3px;
+
+    }
+
+
+    /* FOOTER */
+
+    .footer-inner {
+
+        min-height:
+            90px;
+
+        align-items:
+            flex-start;
+
+        justify-content:
+            center;
+
+        flex-direction:
+            column;
+
+    }
+
+}
+
+
+/* =========================================================
+   26. VERY SMALL MOBILE
+========================================================= */
+
+@media (max-width: 380px) {
+
+    .container {
+
+        width:
+            calc(100% - 28px);
+
+    }
+
+
+    .nav-links a:nth-child(3) {
+
+        display:
+            none;
+
+    }
+
+
+    .hero-title {
+
+        font-size:
+            46px;
+
+        letter-spacing:
+            -2.5px;
+
+    }
+
+
+    .logo-name {
+
+        font-size:
+            19px;
+
+    }
+
+}
+
+
+/* =========================================================
+   27. REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    html {
+
+        scroll-behavior:
+            auto;
+
+    }
+
+
+    *,
+    *::before,
+    *::after {
+
+        animation:
+            none !important;
+
+        transition:
+            none !important;
+
+    }
+
+}
 ```
