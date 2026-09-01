@@ -1,585 +1,380 @@
-/* =========================================================
-   USHA.AI — COMPLETE SCRIPT.JS
-   FormSubmit + Image Preview + Background Animation
-   Mouse Glow + Particles + Smooth UX
-========================================================= */
-
+```javascript
 "use strict";
 
+/* =========================================
+   USHA.AI — CLEAN FINAL SCRIPT
+========================================= */
 
-/* =========================================================
-   1. CONFIGURATION
-========================================================= */
+document.addEventListener("DOMContentLoaded", function () {
 
-const FORM_ENDPOINT =
-    "https://formsubmit.co/ajax/documentsnk@protonmail.com";
+    const form = document.getElementById("mainForm");
+    const imageInput = document.getElementById("image");
+    const preview = document.getElementById("preview");
+    const previewImage = document.getElementById("previewImage");
+    const removeImage = document.getElementById("removeImage");
+    const statusBox = document.getElementById("status");
 
-const MAX_IMAGE_SIZE =
-    10 * 1024 * 1024;
+    const submitButton =
+        document.getElementById("submitButton");
 
+    const buttonText =
+        submitButton
+            ? submitButton.querySelector(".button-text")
+            : null;
 
-/* =========================================================
-   2. GET ELEMENTS
-========================================================= */
-
-const form =
-    document.getElementById("mainForm");
-
-const nameInput =
-    document.getElementById("name");
-
-const numberInput =
-    document.getElementById("number");
-
-const messageInput =
-    document.getElementById("message");
-
-const imageInput =
-    document.getElementById("image");
-
-const preview =
-    document.getElementById("preview");
-
-const previewImage =
-    document.getElementById("previewImage");
-
-const removeImage =
-    document.getElementById("removeImage");
-
-const statusBox =
-    document.getElementById("status");
-
-const submitButton =
-    document.getElementById("submitButton");
-
-const buttonIcon =
-    submitButton
-        ? submitButton.querySelector(".button-icon")
-        : null;
-
-const buttonText =
-    submitButton
-        ? submitButton.querySelector(".button-text")
-        : null;
+    const buttonIcon =
+        submitButton
+            ? submitButton.querySelector(".button-icon")
+            : null;
 
 
-/* =========================================================
-   3. STATUS SYSTEM
-========================================================= */
+    /* =========================================
+       STATUS
+    ========================================= */
 
-function showStatus(
-    message,
-    type = "info"
-) {
+    function showStatus(message, type) {
 
-    if (!statusBox) {
-        return;
-    }
+        if (!statusBox) return;
 
-    statusBox.textContent =
-        message;
+        statusBox.textContent = message;
+        statusBox.className = "status show";
 
-    statusBox.className =
-        "status show";
-
-    if (type === "success") {
-
-        statusBox.classList.add(
-            "success"
-        );
-
-    }
-
-    if (type === "error") {
-
-        statusBox.classList.add(
-            "error"
-        );
-
-    }
-
-}
-
-
-function hideStatus() {
-
-    if (!statusBox) {
-        return;
-    }
-
-    statusBox.textContent =
-        "";
-
-    statusBox.className =
-        "status";
-
-}
-
-
-/* =========================================================
-   4. BUTTON STATES
-========================================================= */
-
-function setButton(
-    state
-) {
-
-    if (!submitButton) {
-        return;
-    }
-
-
-    if (state === "default") {
-
-        submitButton.disabled =
-            false;
-
-        if (buttonIcon) {
-            buttonIcon.textContent =
-                "🚀";
+        if (type === "success") {
+            statusBox.classList.add("success");
         }
 
-        if (buttonText) {
-            buttonText.textContent =
-                "Coming Soon";
+        if (type === "error") {
+            statusBox.classList.add("error");
         }
-
     }
 
 
-    if (state === "sending") {
+    function hideStatus() {
 
-        submitButton.disabled =
-            true;
+        if (!statusBox) return;
 
-        if (buttonIcon) {
-            buttonIcon.textContent =
-                "⏳";
-        }
-
-        if (buttonText) {
-            buttonText.textContent =
-                "Sending...";
-        }
-
+        statusBox.textContent = "";
+        statusBox.className = "status";
     }
 
 
-    if (state === "success") {
+    /* =========================================
+       BUTTON
+    ========================================= */
 
-        submitButton.disabled =
-            true;
+    function buttonState(state) {
 
-        if (buttonIcon) {
-            buttonIcon.textContent =
-                "✓";
+        if (!submitButton) return;
+
+        if (state === "normal") {
+
+            submitButton.disabled = false;
+
+            if (buttonIcon) {
+                buttonIcon.textContent = "🚀";
+            }
+
+            if (buttonText) {
+                buttonText.textContent = "Coming Soon";
+            }
         }
 
-        if (buttonText) {
-            buttonText.textContent =
-                "Sent Successfully";
+
+        if (state === "sending") {
+
+            submitButton.disabled = true;
+
+            if (buttonIcon) {
+                buttonIcon.textContent = "⏳";
+            }
+
+            if (buttonText) {
+                buttonText.textContent = "Sending...";
+            }
         }
 
+
+        if (state === "success") {
+
+            submitButton.disabled = true;
+
+            if (buttonIcon) {
+                buttonIcon.textContent = "✓";
+            }
+
+            if (buttonText) {
+                buttonText.textContent = "Sent!";
+            }
+        }
+
+
+        if (state === "error") {
+
+            submitButton.disabled = false;
+
+            if (buttonIcon) {
+                buttonIcon.textContent = "↻";
+            }
+
+            if (buttonText) {
+                buttonText.textContent = "Try Again";
+            }
+        }
     }
 
 
-    if (state === "error") {
+    /* =========================================
+       IMAGE PREVIEW
+    ========================================= */
 
-        submitButton.disabled =
-            false;
+    function clearImage() {
 
-        if (buttonIcon) {
-            buttonIcon.textContent =
-                "↻";
+        if (imageInput) {
+            imageInput.value = "";
         }
 
-        if (buttonText) {
-            buttonText.textContent =
-                "Try Again";
+        if (previewImage) {
+            previewImage.src = "";
         }
 
+        if (preview) {
+            preview.style.display = "none";
+            preview.classList.remove("show");
+        }
     }
 
-}
-
-
-/* =========================================================
-   5. IMAGE PREVIEW
-========================================================= */
-
-function clearImage() {
 
     if (imageInput) {
 
-        imageInput.value =
-            "";
+        imageInput.addEventListener("change", function () {
 
-    }
-
-
-    if (previewImage) {
-
-        previewImage.src =
-            "";
-
-    }
-
-
-    if (preview) {
-
-        preview.style.display =
-            "none";
-
-        preview.classList.remove(
-            "show"
-        );
-
-    }
-
-}
-
-
-if (imageInput) {
-
-    imageInput.addEventListener(
-        "change",
-        function () {
-
-            const file =
-                this.files &&
-                this.files[0];
-
+            const file = this.files[0];
 
             if (!file) {
-
                 clearImage();
-
                 return;
-
             }
 
 
-            /* Check file type */
+            if (!file.type.startsWith("image/")) {
 
-            if (
-                !file.type.startsWith(
-                    "image/"
-                )
-            ) {
+                clearImage();
 
                 showStatus(
-                    "That doesn't look like an image. Nice try though. 😄",
+                    "Please choose an image file. 🖼️",
                     "error"
                 );
 
-                clearImage();
-
                 return;
-
             }
 
 
-            /* Check size */
+            if (file.size > 10 * 1024 * 1024) {
 
-            if (
-                file.size >
-                MAX_IMAGE_SIZE
-            ) {
+                clearImage();
 
                 showStatus(
-                    "That image is too big. Please keep it under 10 MB.",
+                    "Image must be smaller than 10 MB.",
                     "error"
                 );
 
-                clearImage();
-
                 return;
-
             }
 
 
-            /* Read image */
-
-            const reader =
-                new FileReader();
+            const reader = new FileReader();
 
 
-            reader.onload =
-                function (event) {
+            reader.onload = function (event) {
 
-                    if (previewImage) {
+                if (previewImage) {
+                    previewImage.src =
+                        event.target.result;
+                }
 
-                        previewImage.src =
-                            event.target.result;
+                if (preview) {
 
-                    }
+                    preview.style.display = "block";
 
+                    preview.classList.add("show");
+                }
 
-                    if (preview) {
-
-                        preview.style.display =
-                            "block";
-
-                        preview.classList.add(
-                            "show"
-                        );
-
-                    }
-
-                    hideStatus();
-
-                };
+                hideStatus();
+            };
 
 
-            reader.onerror =
-                function () {
+            reader.onerror = function () {
+
+                showStatus(
+                    "Could not read that image.",
+                    "error"
+                );
+            };
+
+
+            reader.readAsDataURL(file);
+
+        });
+    }
+
+
+    /* =========================================
+       REMOVE IMAGE
+    ========================================= */
+
+    if (removeImage) {
+
+        removeImage.addEventListener(
+            "click",
+            function () {
+
+                clearImage();
+                hideStatus();
+
+            }
+        );
+    }
+
+
+    /* =========================================
+       FORM SUBMIT
+    ========================================= */
+
+    if (form) {
+
+        form.addEventListener(
+            "submit",
+            async function (event) {
+
+                event.preventDefault();
+
+
+                const name =
+                    document.getElementById("name");
+
+                const number =
+                    document.getElementById("number");
+
+                const message =
+                    document.getElementById("message");
+
+
+                /* Validation */
+
+                if (
+                    !name ||
+                    name.value.trim().length < 2
+                ) {
 
                     showStatus(
-                        "The image preview had a tiny existential crisis.",
+                        "Please enter your name.",
                         "error"
                     );
 
-                };
+                    if (name) name.focus();
 
-
-            reader.readAsDataURL(
-                file
-            );
-
-        }
-    );
-
-}
-
-
-/* =========================================================
-   6. REMOVE IMAGE
-========================================================= */
-
-if (removeImage) {
-
-    removeImage.addEventListener(
-        "click",
-        function () {
-
-            clearImage();
-
-            hideStatus();
-
-        }
-    );
-
-}
-
-
-/* =========================================================
-   7. VALIDATION
-========================================================= */
-
-function validateForm() {
-
-
-    /* Name */
-
-    if (
-        !nameInput ||
-        nameInput.value.trim().length < 2
-    ) {
-
-        showStatus(
-            "Please enter your name.",
-            "error"
-        );
-
-        nameInput?.focus();
-
-        return false;
-
-    }
-
-
-    /* Number */
-
-    if (
-        !numberInput ||
-        numberInput.value.trim().length < 3
-    ) {
-
-        showStatus(
-            "Please enter your number.",
-            "error"
-        );
-
-        numberInput?.focus();
-
-        return false;
-
-    }
-
-
-    /* Message */
-
-    if (
-        !messageInput ||
-        messageInput.value.trim().length < 2
-    ) {
-
-        showStatus(
-            "Write something first. The box is lonely. 🥲",
-            "error"
-        );
-
-        messageInput?.focus();
-
-        return false;
-
-    }
-
-
-    return true;
-
-}
-
-
-/* =========================================================
-   8. FORM SUBMISSION
-========================================================= */
-
-if (form) {
-
-    form.addEventListener(
-        "submit",
-        async function (event) {
-
-            event.preventDefault();
-
-
-            /* Prevent empty submit */
-
-            if (!validateForm()) {
-
-                return;
-
-            }
-
-
-            /* Change button */
-
-            setButton(
-                "sending"
-            );
-
-            hideStatus();
-
-
-            /* Build FormData */
-
-            const formData =
-                new FormData(form);
-
-
-            /*
-             * Add current page URL.
-             */
-
-            formData.set(
-                "_url",
-                window.location.href
-            );
-
-
-            /*
-             * Make sure FormSubmit
-             * doesn't redirect.
-             */
-
-            formData.set(
-                "_captcha",
-                "false"
-            );
-
-
-            try {
-
-                const response =
-                    await fetch(
-                        FORM_ENDPOINT,
-                        {
-                            method:
-                                "POST",
-
-                            headers: {
-                                "Accept":
-                                    "application/json"
-                            },
-
-                            body:
-                                formData
-                        }
-                    );
-
-
-                let data =
-                    null;
-
-
-                const contentType =
-                    response.headers.get(
-                        "content-type"
-                    );
+                    return;
+                }
 
 
                 if (
-                    contentType &&
-                    contentType.includes(
-                        "application/json"
-                    )
+                    !number ||
+                    number.value.trim().length < 3
                 ) {
 
-                    data =
-                        await response.json();
+                    showStatus(
+                        "Please enter your number.",
+                        "error"
+                    );
 
+                    if (number) number.focus();
+
+                    return;
                 }
-                else {
+
+
+                if (
+                    !message ||
+                    message.value.trim().length < 2
+                ) {
+
+                    showStatus(
+                        "Write something first. 😄",
+                        "error"
+                    );
+
+                    if (message) message.focus();
+
+                    return;
+                }
+
+
+                /* Sending */
+
+                buttonState("sending");
+                hideStatus();
+
+
+                const formData =
+                    new FormData(form);
+
+
+                /*
+                 * IMPORTANT:
+                 * Your FormSubmit email.
+                 */
+
+                const endpoint =
+                    "https://formsubmit.co/ajax/documentsnk@protonmail.com";
+
+
+                try {
+
+                    const response =
+                        await fetch(
+                            endpoint,
+                            {
+                                method: "POST",
+
+                                headers: {
+                                    "Accept":
+                                        "application/json"
+                                },
+
+                                body: formData
+                            }
+                        );
+
 
                     const text =
                         await response.text();
 
-                    data = {
-                        success:
-                            response.ok,
 
-                        message:
-                            text
-                    };
-
-                }
-
-
-                console.log(
-                    "usha.ai response:",
-                    data
-                );
-
-
-                /* Successful request */
-
-                if (
-                    response.ok
-                ) {
-
-                    setButton(
-                        "success"
+                    console.log(
+                        "FormSubmit response:",
+                        text
                     );
+
+
+                    if (!response.ok) {
+
+                        throw new Error(
+                            "Server returned " +
+                            response.status
+                        );
+                    }
+
+
+                    /* Success */
+
+                    buttonState("success");
 
 
                     showStatus(
-                        "Sent. The internet has received your tiny message. ✨",
+                        "Sent successfully. ✨",
                         "success"
                     );
 
-
-                    /* Reset */
 
                     form.reset();
 
@@ -587,620 +382,308 @@ if (form) {
 
 
                     /*
-                     * Go home automatically.
+                     * Return home after success.
                      */
 
                     setTimeout(
                         function () {
 
-                            goHome();
+                            const home =
+                                document.getElementById(
+                                    "home"
+                                );
+
+                            if (home) {
+
+                                home.scrollIntoView({
+                                    behavior:
+                                        "smooth"
+                                });
+
+                            } else {
+
+                                window.scrollTo({
+                                    top: 0,
+                                    behavior:
+                                        "smooth"
+                                });
+
+                            }
 
                         },
-                        1600
+                        1400
                     );
 
 
-                    /*
-                     * Reset button.
-                     */
-
                     setTimeout(
                         function () {
 
-                            setButton(
-                                "default"
-                            );
-
+                            buttonState("normal");
                             hideStatus();
 
                         },
-                        4500
+                        4000
                     );
 
                 }
-                else {
+                catch (error) {
 
-                    throw new Error(
-                        data?.message ||
-                        "Form submission failed."
+                    console.error(
+                        "USHA.AI FORM ERROR:",
+                        error
                     );
 
+
+                    buttonState("error");
+
+
+                    showStatus(
+                        "Something went wrong. Please try again. 😅",
+                        "error"
+                    );
                 }
 
             }
-            catch (error) {
-
-                console.error(
-                    "FormSubmit error:",
-                    error
-                );
-
-
-                setButton(
-                    "error"
-                );
-
-
-                showStatus(
-                    "Oops. The internet tripped over a cable. Please try again.",
-                    "error"
-                );
-
-            }
-
-        }
-    );
-
-}
-
-
-/* =========================================================
-   9. GO HOME
-========================================================= */
-
-function goHome() {
-
-    try {
-
-        history.replaceState(
-            null,
-            "",
-            "#home"
         );
-
-    }
-    catch (error) {
-
-        window.location.hash =
-            "home";
-
     }
 
 
-    const home =
-        document.getElementById(
-            "home"
-        );
+    /* =========================================
+       SMOOTH NAVIGATION
+    ========================================= */
 
-
-    if (home) {
-
-        home.scrollIntoView({
-            behavior:
-                "smooth",
-
-            block:
-                "start"
-        });
-
-    }
-    else {
-
-        window.scrollTo({
-            top:
-                0,
-
-            behavior:
-                "smooth"
-        });
-
-    }
-
-}
-
-
-/* =========================================================
-   10. SMOOTH NAVIGATION
-========================================================= */
-
-document
-    .querySelectorAll(
-        'a[href^="#"]'
-    )
-    .forEach(
-        function (link) {
+    document
+        .querySelectorAll('a[href^="#"]')
+        .forEach(function (link) {
 
             link.addEventListener(
                 "click",
                 function (event) {
 
-                    const targetId =
-                        link.getAttribute(
-                            "href"
-                        );
+                    const id =
+                        link.getAttribute("href");
 
-
-                    if (
-                        !targetId ||
-                        targetId === "#"
-                    ) {
-
+                    if (!id || id === "#") {
                         return;
-
                     }
 
 
                     const target =
-                        document.querySelector(
-                            targetId
-                        );
-
+                        document.querySelector(id);
 
                     if (!target) {
-
                         return;
-
                     }
 
 
                     event.preventDefault();
 
 
-                    try {
-
-                        history.replaceState(
-                            null,
-                            "",
-                            targetId
-                        );
-
-                    }
-                    catch (error) {
-
-                        /* Ignore */
-
-                    }
-
-
                     target.scrollIntoView({
-                        behavior:
-                            "smooth",
-
-                        block:
-                            "start"
+                        behavior: "smooth",
+                        block: "start"
                     });
 
                 }
             );
 
-        }
-    );
+        });
 
 
-/* =========================================================
-   11. MOUSE FOLLOW GLOW
-========================================================= */
-
-function createMouseGlow() {
-
-    /*
-     * Don't run on touch-only devices.
-     */
+    /* =========================================
+       MOUSE GLOW
+    ========================================= */
 
     if (
-        window.matchMedia(
+        !window.matchMedia(
             "(pointer: coarse)"
         ).matches
     ) {
 
-        return;
+        const glow =
+            document.createElement("div");
 
-    }
+        glow.className = "mouse-glow";
+
+        document.body.appendChild(glow);
 
 
-    const glow =
-        document.createElement(
-            "div"
+        let x =
+            window.innerWidth / 2;
+
+        let y =
+            window.innerHeight / 2;
+
+        let currentX = x;
+        let currentY = y;
+
+
+        window.addEventListener(
+            "mousemove",
+            function (event) {
+
+                x = event.clientX;
+                y = event.clientY;
+
+                glow.style.opacity = "1";
+
+            },
+            {
+                passive: true
+            }
         );
 
 
-    glow.className =
-        "mouse-glow";
+        window.addEventListener(
+            "mouseleave",
+            function () {
 
+                glow.style.opacity = "0";
 
-    glow.style.position =
-        "fixed";
-
-    glow.style.width =
-        "260px";
-
-    glow.style.height =
-        "260px";
-
-    glow.style.borderRadius =
-        "50%";
-
-    glow.style.pointerEvents =
-        "none";
-
-    glow.style.zIndex =
-        "-1";
-
-    glow.style.opacity =
-        "0";
-
-    glow.style.filter =
-        "blur(70px)";
-
-    glow.style.background =
-        "rgba(196,155,39,.10)";
-
-    glow.style.transform =
-        "translate(-50%,-50%)";
-
-    glow.style.transition =
-        "opacity .4s ease";
-
-
-    document.body.appendChild(
-        glow
-    );
-
-
-    let mouseX =
-        window.innerWidth / 2;
-
-    let mouseY =
-        window.innerHeight / 2;
-
-    let currentX =
-        mouseX;
-
-    let currentY =
-        mouseY;
-
-
-    window.addEventListener(
-        "mousemove",
-        function (event) {
-
-            mouseX =
-                event.clientX;
-
-            mouseY =
-                event.clientY;
-
-            glow.style.opacity =
-                "1";
-
-        },
-        {
-            passive:
-                true
-        }
-    );
-
-
-    window.addEventListener(
-        "mouseleave",
-        function () {
-
-            glow.style.opacity =
-                "0";
-
-        }
-    );
-
-
-    function animateGlow() {
-
-        currentX +=
-            (mouseX - currentX) *
-            .08;
-
-        currentY +=
-            (mouseY - currentY) *
-            .08;
-
-
-        glow.style.left =
-            currentX + "px";
-
-        glow.style.top =
-            currentY + "px";
-
-
-        requestAnimationFrame(
-            animateGlow
+            }
         );
 
+
+        function animateGlow() {
+
+            currentX +=
+                (x - currentX) * 0.08;
+
+            currentY +=
+                (y - currentY) * 0.08;
+
+
+            glow.style.left =
+                currentX + "px";
+
+            glow.style.top =
+                currentY + "px";
+
+
+            requestAnimationFrame(
+                animateGlow
+            );
+        }
+
+
+        animateGlow();
     }
 
 
-    animateGlow();
+    /* =========================================
+       FLOATING PARTICLES
+    ========================================= */
 
-}
+    const particleContainer =
+        document.getElementById("particles");
 
-
-/* =========================================================
-   12. FLOATING PARTICLES
-========================================================= */
-
-function createParticles() {
-
-    /*
-     * Respect reduced motion.
-     */
 
     if (
-        window.matchMedia(
+        particleContainer &&
+        !window.matchMedia(
             "(prefers-reduced-motion: reduce)"
         ).matches
     ) {
 
-        return;
-
-    }
-
-
-    const container =
-        document.createElement(
-            "div"
-        );
+        const amount =
+            window.innerWidth < 700
+                ? 8
+                : 16;
 
 
-    container.className =
-        "usha-particles";
+        for (
+            let i = 0;
+            i < amount;
+            i++
+        ) {
+
+            const particle =
+                document.createElement("span");
 
 
-    container.style.position =
-        "fixed";
-
-    container.style.inset =
-        "0";
-
-    container.style.pointerEvents =
-        "none";
-
-    container.style.overflow =
-        "hidden";
-
-    container.style.zIndex =
-        "-1";
+            const size =
+                Math.random() * 4 + 2;
 
 
-    document.body.appendChild(
-        container
-    );
+            particle.style.position =
+                "absolute";
+
+            particle.style.left =
+                Math.random() * 100 + "%";
+
+            particle.style.top =
+                Math.random() * 100 + "%";
+
+            particle.style.width =
+                size + "px";
+
+            particle.style.height =
+                size + "px";
+
+            particle.style.borderRadius =
+                "50%";
+
+            particle.style.background =
+                "rgba(196,155,39,.28)";
 
 
-    const particleCount =
-        window.innerWidth < 700
-            ? 10
-            : 18;
+            particle.animate(
+                [
+                    {
+                        transform:
+                            "translate(0,0)",
+                        opacity: 0
+                    },
+                    {
+                        transform:
+                            "translate(25px,-60px)",
+                        opacity: .65
+                    },
+                    {
+                        transform:
+                            "translate(-20px,-120px)",
+                        opacity: 0
+                    }
+                ],
+                {
+                    duration:
+                        (12 + Math.random() * 10) *
+                        1000,
 
+                    delay:
+                        Math.random() *
+                        -12000,
 
-    for (
-        let i = 0;
-        i < particleCount;
-        i++
-    ) {
+                    iterations:
+                        Infinity,
 
-        const particle =
-            document.createElement(
-                "span"
+                    easing:
+                        "ease-in-out"
+                }
             );
 
 
-        const size =
-            Math.random() * 4 + 2;
-
-
-        const startX =
-            Math.random() * 100;
-
-
-        const startY =
-            Math.random() * 100;
-
-
-        const duration =
-            Math.random() * 15 + 12;
-
-
-        const delay =
-            Math.random() * -15;
-
-
-        particle.style.position =
-            "absolute";
-
-        particle.style.left =
-            startX + "%";
-
-        particle.style.top =
-            startY + "%";
-
-        particle.style.width =
-            size + "px";
-
-        particle.style.height =
-            size + "px";
-
-        particle.style.borderRadius =
-            "50%";
-
-        particle.style.background =
-            "rgba(196,155,39,.25)";
-
-        particle.style.boxShadow =
-            "0 0 14px rgba(196,155,39,.12)";
-
-
-        particle.animate(
-            [
-                {
-                    transform:
-                        "translate3d(0,0,0) scale(.7)",
-
-                    opacity:
-                        0
-                },
-
-                {
-                    transform:
-                        "translate3d(30px,-50px,0) scale(1)",
-
-                    opacity:
-                        .7
-                },
-
-                {
-                    transform:
-                        "translate3d(-20px,-120px,0) scale(.5)",
-
-                    opacity:
-                        0
-                }
-            ],
-            {
-                duration:
-                    duration * 1000,
-
-                delay:
-                    delay * 1000,
-
-                iterations:
-                    Infinity,
-
-                easing:
-                    "ease-in-out"
-            }
-        );
-
-
-        container.appendChild(
-            particle
-        );
-
+            particleContainer.appendChild(
+                particle
+            );
+        }
     }
 
-}
+
+    /* =========================================
+       INITIAL STATE
+    ========================================= */
+
+    buttonState("normal");
+
+    hideStatus();
+
+    clearImage();
 
 
-/* =========================================================
-   13. BUTTON MICRO INTERACTION
-========================================================= */
-
-if (submitButton) {
-
-    submitButton.addEventListener(
-        "mouseenter",
-        function () {
-
-            if (
-                submitButton.disabled
-            ) {
-
-                return;
-
-            }
-
-
-            submitButton.style.transform =
-                "translateY(-3px)";
-
-        }
+    console.log(
+        "usha.ai loaded successfully. 👀"
     );
 
-
-    submitButton.addEventListener(
-        "mouseleave",
-        function () {
-
-            if (
-                submitButton.disabled
-            ) {
-
-                return;
-
-            }
-
-
-            submitButton.style.transform =
-                "";
-
-        }
-    );
-
-}
-
-
-/* =========================================================
-   14. ESCAPE KEY
-========================================================= */
-
-document.addEventListener(
-    "keydown",
-    function (event) {
-
-        if (
-            event.key === "Escape"
-        ) {
-
-            if (
-                imageInput &&
-                imageInput.files &&
-                imageInput.files.length
-            ) {
-
-                clearImage();
-
-            }
-
-        }
-
-    }
-);
-
-
-/* =========================================================
-   15. INITIALIZE
-========================================================= */
-
-setButton(
-    "default"
-);
-
-hideStatus();
-
-clearImage();
-
-createMouseGlow();
-
-createParticles();
-
-
-/* =========================================================
-   16. CONSOLE
-========================================================= */
-
-console.log(
-    "%c usha.ai ",
-    "background:#171717;color:#c49b27;padding:8px 14px;border-radius:7px;font-weight:800;"
-);
-
-console.log(
-    "Everything is suspiciously normal. 👀"
-);
- 
+});
+```
