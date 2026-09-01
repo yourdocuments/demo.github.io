@@ -1,4 +1,3 @@
-```javascript
 /* =========================================================
    USHA.AI — COMPLETE SCRIPT.JS
    FormSubmit + Image Preview + Background Animation
